@@ -1,6 +1,6 @@
 ---
 name: read-doc
-description: Pre-step for code generation. Fetch official documentation and create a technical reference summary. Trigger when user mentions a specific technology/library/framework and wants to generate or modify code.
+description: Fetch official documentation before writing or modifying code. Use when user says "using X", "with X library", "create/build/implement/fix/update/refactor something with X", "help me with X", or mentions any library/framework/package name (like gsap, framer-motion, three.js, zustand, zod, etc.) and wants to write, modify, fix, or update code.
 allowed-tools: WebFetch
 ---
 
@@ -35,6 +35,16 @@ Only ask once per technology in a session.
 Use WebFetch to retrieve the entry page. Extract:
 - Navigation links (sidebar, table of contents)
 - Link titles and URLs
+
+**If WebFetch fails** (domain blocked, network error, etc.), inform the user:
+
+> Unable to fetch documentation from `[url]`.
+>
+> Options:
+> - **Try different URL** - provide an alternative documentation URL
+> - **Skip** - proceed without documentation reference
+
+Do not retry the same URL. If user provides alternative URL and it also fails, skip documentation fetch and proceed with existing knowledge.
 
 ### Step 3: Navigate to Relevant Page
 
