@@ -4,6 +4,8 @@
 
 Claude Code 技能，用于基于官方文档生成代码。此技能会获取官方文档并创建技术参考摘要，作为代码生成的前置步骤。
 
+![Screenshot](./assets/screenshot.jpg)
+
 ## 安装
 
 ```bash

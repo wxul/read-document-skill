@@ -4,6 +4,8 @@
 
 Claude Code skill for documentation-driven code generation. This skill fetches official documentation and creates a technical reference summary as a pre-step for code generation.
 
+![Screenshot](./assets/screenshot.jpg)
+
 ## Installation
 
 ```bash
