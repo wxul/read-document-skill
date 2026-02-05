@@ -1,0 +1,16 @@
+{
+  "name": "read-document-skill",
+  "version": "1.0.0",
+  "description": "Claude Code skill for documentation-driven code generation",
+  "keywords": [
+    "claude-code",
+    "skill",
+    "code-generation",
+    "documentation"
+  ],
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wxul/read-document-skill"
+  }
+}
