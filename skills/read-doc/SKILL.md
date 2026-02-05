@@ -1,15 +1,16 @@
 ---
 name: read-doc
-description: Fetch documentation from URL and use it to generate accurate code. Use when user wants to generate code based on official documentation.
+description: Pre-step for code generation. Fetch official documentation and create a technical reference summary. Trigger when user mentions a specific technology/library/framework and wants to generate or modify code.
+allowed-tools: WebFetch
 ---
 
-# Documentation-Driven Code Generation
+# Documentation Reference Generator
 
-Fetch documentation, summarize key information, and generate code based on official docs.
+This is a **pre-step** for code generation. Fetch documentation and produce a technical reference summary that will be used for subsequent code generation.
 
-## Input
+## Trigger
 
-`<technology> <requirement>`
+When user requests to generate or modify code using a specific technology/library/framework.
 
 ## Workflow
 
@@ -17,11 +18,15 @@ Fetch documentation, summarize key information, and generate code based on offic
 
 Based on the technology name, suggest the official documentation URL.
 
-Ask user to confirm:
+Ask user with options:
 
-> I'll use documentation from: `[url]`
+> I'll fetch documentation from: `[url]`
 >
-> Is this correct, or provide a different URL?
+> - **Yes** - proceed with this URL
+> - **Use different URL** - provide an alternative URL
+> - **Ignore** - skip this step, proceed without documentation reference
+
+If user selects **Ignore**, skip this skill entirely and proceed to code generation using existing knowledge.
 
 Only ask once per technology in a session.
 
@@ -33,29 +38,37 @@ Use WebFetch to retrieve the entry page. Extract:
 
 ### Step 3: Navigate to Relevant Page
 
-Match user's requirement keywords with link titles, then fetch the specific sub-page.
+Based on user's code requirement, match keywords with link titles and fetch the specific sub-page(s) that are most relevant.
 
-### Step 4: Summarize and Generate
+### Step 4: Generate Technical Reference Summary
 
-From the documentation, extract:
-- API signatures and parameters
-- Usage examples
-- Best practices
-
-Generate code following official patterns.
+Extract and summarize from the documentation:
+- Relevant API signatures and parameters
+- Usage patterns and examples
+- Best practices and recommendations
+- Common pitfalls to avoid
 
 ### Step 5: Output
 
+Produce a technical reference summary:
+
 ```markdown
-## Documentation
-- Source: [url]
+## Technical Reference: [technology]
 
-## Summary
-[Key API info from docs]
+### Source
+- [documentation URL]
 
-## Code
-[Generated code]
+### Relevant APIs
+[API signatures, parameters, return types]
 
-## Notes
-[Important details from docs]
+### Usage Patterns
+[Code examples from docs]
+
+### Best Practices
+[Recommendations from docs]
+
+### Notes
+[Important caveats or version-specific info]
 ```
+
+This summary will be used as reference for the subsequent code generation step.
